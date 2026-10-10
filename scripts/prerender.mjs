@@ -1,7 +1,9 @@
 import fs from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { render, routes, pageMeta } from "../.build/entry-server.js";
-const theme = (await fs.readFile("public/theme.js", "utf8")).replaceAll('\r\n','\n').trim();
+const theme = (await fs.readFile("public/theme.js", "utf8"))
+  .replaceAll("\r\n", "\n")
+  .trim();
 const themeHash = createHash("sha256").update(theme).digest("base64");
 const template = (await fs.readFile("dist/index.html", "utf8")).replace(
   '<script src="/theme.js"></script>',

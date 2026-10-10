@@ -16,14 +16,35 @@ Tested on 10 October 2026 with Node 24.16.0, Playwright Chromium 156, and Lighth
 
 Local homepage, mobile simulation, compressed production-style static delivery:
 
-| Category | Score |
-| --- | ---: |
-| Performance | 90 |
-| Accessibility | 100 |
-| Best Practices | 100 |
-| SEO | 100 |
+| Category       | Score |
+| -------------- | ----: |
+| Performance    |    90 |
+| Accessibility  |   100 |
+| Best Practices |   100 |
+| SEO            |   100 |
 
 Measured FCP: 1.5 s; LCP: 3.6 s; total blocking time: 0 ms; CLS: 0. Measurements vary with network, host load, and browser version. These are lab measurements, not real-user Core Web Vitals.
+
+## Verified Cloudflare deployment
+
+Live: https://nexhome.pages.dev  
+Repository: https://github.com/Arnav-Dugad/nexhome  
+Project: `nexhome`; branch: `main`; build: `npm run build`; output: `dist`; configured Node major: 24 (observed build runtime 24.13.1).
+
+Cloudflare deployment history confirms `github:push` triggers, cloning the exact pushed commit, a successful build, Functions compilation, and asset publication. Multiple subsequent pushes triggered successful rebuilds. Public routes and images load, unknown routes return HTTP 404, `/api/status` returns HTTP 200 with `signups: false`, and `/api/signup` returns HTTP 503 without saving data. Security headers and the hash-authorized inline theme initializer were verified live with no console errors during normal page loading.
+
+All nine Playwright suites passed locally and against the live deployment. All four API contract tests passed locally. A final reduced-motion check also passed after disabling scroll-linked animations for that preference.
+
+Final optimized production homepage, mobile Lighthouse:
+
+| Category       | Score |
+| -------------- | ----: |
+| Performance    |    91 |
+| Accessibility  |   100 |
+| Best Practices |   100 |
+| SEO            |   100 |
+
+Production FCP: 1.7 s; LCP: 3.4 s; TBT: 0 ms; CLS: 0. Initial JavaScript is ~90 kB gzip; 3D remains an on-demand chunk. Lab scores vary and are not field performance guarantees.
 
 ## Product and service limitations
 
