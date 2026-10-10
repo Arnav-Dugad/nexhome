@@ -4,3 +4,4 @@ compatibility_date = "2026-10-10"
 
 [vars]
 SIGNUPS_ENABLED = "false"
+NODE_VERSION = "24"
