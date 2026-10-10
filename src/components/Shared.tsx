@@ -9,7 +9,7 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 import { products, type Product } from "../data";
 export function LinkButton({
   href,
@@ -34,17 +34,15 @@ export function Reveal({
   children: ReactNode;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const visible = useInView(ref, { once: true, amount: 0.1 });
   return (
-    <motion.div
-      className={className}
-      initial={{ y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: reduced ? 0 : 0.7 }}
+    <div
+      ref={ref}
+      className={className + " reveal " + (visible ? "reveal-visible" : "")}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 export function Header({ path }: { path: string }) {

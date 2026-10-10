@@ -371,7 +371,7 @@ function Gallery({ product }: { product: Product }) {
           Every intention.
         </h2>
         <p>
-          AI-generated beauty concept and original 3D design studies.
+            AI-generated concept imagery and original 3D design studies.
           Engineering details are illustrative.
         </p>
       </div>
@@ -598,7 +598,7 @@ function ProductPage({ product: p }: { product: Product }) {
             ],
             [
               "Are the images real product photographs?",
-              "No. Beauty images are AI-generated concept renders. Other views and the interactive viewer are original 3D design studies. None represent manufactured prototypes.",
+            "No. Beauty, material, and selected lifestyle images are AI-generated concept renders. Remaining views and the interactive viewer are simplified original 3D design studies. None represent manufactured prototypes.",
             ],
             [
               "Will this work with my existing devices?",

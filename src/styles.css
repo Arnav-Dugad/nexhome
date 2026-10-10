@@ -1758,6 +1758,35 @@ textarea::placeholder {
   white-space: nowrap;
   border: 0;
 }
+.reveal {
+  transform: translateY(18px);
+  transition: transform 0.7s var(--ease);
+}
+.reveal-visible {
+  transform: translateY(0);
+}
+.gallery-dialog[open] {
+  animation: hero-enter 0.3s var(--ease);
+}
+.mobile-menu {
+  animation: hero-enter 0.3s var(--ease);
+}
+@supports (animation-timeline: view()) {
+  @keyframes section-rise {
+    from {
+      transform: translateY(25px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  .section-heading h2,
+  .split-heading h2 {
+    animation: section-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+}
 .mobile-menu {
   position: fixed;
   inset: 83px 0 0;
