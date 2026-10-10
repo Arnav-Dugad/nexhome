@@ -1,0 +1,6 @@
+name = "nexhome"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-10"
+
+[vars]
+SIGNUPS_ENABLED = "false"

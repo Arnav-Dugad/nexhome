@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2");
+}
+:root {
+  --paper: #f5f4ef;
+  --ink: #282f27;
+  --muted: #62685c;
+  --surface: #faf9f5;
+  --soft: #eeede5;
+  --line: #dadcd2;
+  --accent: #b38a4a;
+  --success: #47703d;
+  --error: #a43b30;
+  --nav: #f5f4efd9;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 64px;
+  --space-6: 100px;
+  --radius: 2px;
+  --duration: 0.3s;
+  --shadow: 0 20px 65px #20271c12;
+  --button-hover: #434841;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --paper: #20261f;
+  --ink: #edf0e6;
+  --muted: #b0b7a5;
+  --surface: #252d24;
+  --soft: #2c342a;
+  --line: #485040;
+  --accent: #d2ad70;
+  --success: #bdd7a7;
+  --error: #ffa398;
+  --nav: #20261fe8;
+  --button-hover: #d4dcc9;
+  color-scheme: dark;
+}

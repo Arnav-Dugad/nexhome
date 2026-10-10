@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.build/
+.wrangler/
+.env*
+!.env.example
+test-results/
+playwright-report/
+artifacts/
+.playwright-mcp/
+*.log
