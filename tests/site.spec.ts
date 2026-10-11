@@ -97,7 +97,7 @@ test("every product gallery, FAQ, finish and 3D viewer", async ({ page }) => {
     await page.keyboard.press("Escape");
     await expect(page.locator("dialog")).toHaveCount(0);
     await page
-      .getByRole("button", { name: `Can I buy NEXHOME ${p.name}?` })
+      .getByRole("button", { name: `Can I buy Profectus360 ${p.name}?` })
       .click();
     await expect(page.locator("#faq-0")).toBeVisible();
     await page.getByRole("button", { name: "Graphite", exact: true }).click();
@@ -143,7 +143,9 @@ test("unavailable signup is transparent; local contact draft downloads", async (
   page,
 }) => {
   await page.goto("/early-access");
-  await expect(page.getByText("Registration isn’t open yet.")).toBeVisible();
+  await expect(
+    page.getByText("Email signup remains unavailable.", { exact: false }),
+  ).toBeVisible();
   await expect(
     page.getByRole("textbox", { name: "Email address" }),
   ).toHaveCount(0);
@@ -152,11 +154,13 @@ test("unavailable signup is transparent; local contact draft downloads", async (
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Download inquiry draft" }).click();
   expect((await downloadPromise).suggestedFilename()).toBe(
-    "nexhome-inquiry.txt",
+    "profectus360-inquiry.txt",
   );
   await expect(page.getByRole("status")).toContainText("It has not been sent.");
 });
 test("accessible primary pages in light and dark themes", async ({ page }) => {
+  // Forty full-page audits need a longer allowance on a busy development machine.
+  test.setTimeout(180000);
   for (const route of routes.filter((r) => r !== "/404")) {
     await page.goto(route);
     const results = await new AxeBuilder({ page })
@@ -199,4 +203,70 @@ test("404, reduced motion, and keyboard skip link", async ({ page }) => {
   ).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("main")).toBeFocused();
+});
+
+test("Express interest preselects a product, validates, recovers from errors and saves to D1", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/products/sense");
+  await page.getByRole("link", { name: "Express interest in Sense" }).click();
+  await expect(page).toHaveURL(/early-access\/?\?product=sense/);
+  await expect(
+    page.getByRole("checkbox", { name: "Sense", exact: true }),
+  ).toBeChecked();
+  await page.getByRole("checkbox", { name: "Sense", exact: true }).uncheck();
+  await page.getByRole("checkbox", { name: /I agree to send/ }).check();
+  await page
+    .getByRole("button", { name: "Express interest", exact: true })
+    .click();
+  await expect(page.getByRole("status")).toContainText(
+    "Choose at least one product",
+  );
+  await page.getByRole("checkbox", { name: "Core", exact: true }).check();
+  await page.getByRole("checkbox", { name: "Light", exact: true }).check();
+  await page.route("**/api/interest", (route) =>
+    route.fulfill({
+      status: 503,
+      contentType: "application/json",
+      body: JSON.stringify({
+        saved: false,
+        message: "Temporarily unavailable. Please try again.",
+      }),
+    }),
+  );
+  await page
+    .getByRole("button", { name: "Express interest", exact: true })
+    .click();
+  await expect(page.getByRole("status")).toContainText("Please try again");
+  await expect(
+    page.getByRole("checkbox", { name: "Core", exact: true }),
+  ).toBeChecked();
+  await expect(
+    page.getByRole("heading", { name: "Interest recorded." }),
+  ).toHaveCount(0);
+  await page.unroute("**/api/interest");
+  const status = await request.get("/api/status");
+  expect(
+    (await status.json()).interest,
+    "Run with wrangler pages dev to exercise real D1 storage",
+  ).toBe(true);
+  const responsePromise = page.waitForResponse(
+    (r) => r.url().endsWith("/api/interest") && r.request().method() === "POST",
+  );
+  await page
+    .getByRole("button", { name: "Express interest", exact: true })
+    .click();
+  const response = await responsePromise;
+  expect(response.status()).toBe(200);
+  expect((await response.json()).saved).toBe(true);
+  await expect(page.getByRole("status")).toContainText(
+    "Your interest has been recorded",
+  );
+  await expect(page.locator(".interest-tags")).toContainText("Core");
+  await expect(page.locator(".interest-tags")).toContainText("Light");
+  await expect(page.getByRole("textbox")).toHaveCount(0);
+  await expect(
+    page.getByRole("textbox", { name: "Email address" }),
+  ).toHaveCount(0);
 });

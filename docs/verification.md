@@ -1,5 +1,18 @@
 # Verification
 
+## Profectus360 update — 11 October 2026
+
+- Rebranded public content, metadata, navigation, favicon, download filenames, and theme storage. Existing repository and hosting URLs are preserved.
+- Express interest records anonymous product selections in a dedicated Cloudflare D1 database. Product links preselect a concept. Email signup stays disabled; no public email is published.
+- Strict TypeScript build and ESLint pass. Wrangler-generated temporary files are excluded from linting.
+- Eight API checks pass, using real SQLite for interest persistence, retry deduplication, retention, and rate limiting. Invalid origins, payloads, product IDs, consent, and honeypots are rejected. Storage failures do not report success.
+- All ten browser checks pass across the final runs against Cloudflare's local Pages runtime and local D1. These cover public routes and images, seven responsive widths, existing interactions, local contact download, disabled email signup, and the new interest flow from product preselection through validation, an unavailable response, recovery, and confirmed storage.
+- Axe audits pass on all twenty public routes in both light and dark themes. The forty-page audit has a 180-second allowance to accommodate a busy development machine; the final audit completed in 22 seconds.
+- Desktop and mobile hero and interest-page screenshots reviewed. Initial JavaScript remains approximately 90 kB gzip; 3D is still loaded on demand.
+- The production interest schema has been applied. Live publication and verification are performed after pushing the release commit.
+
+## Original release — 10 October 2026
+
 Tested on 10 October 2026 with Node 24.16.0, Playwright Chromium 156, and Lighthouse 13.5.0.
 
 ## Local production build
@@ -50,7 +63,7 @@ Production FCP: 1.7 s; LCP: 3.4 s; TBT: 0 ms; CLS: 0. Initial JavaScript is ~90 
 
 - Hardware and software capabilities are concept targets, not verified product behavior.
 - AI beauty images and simplified procedural 3D studies share a design direction but are not identical engineering models. Exploded internals and ports are illustrative.
-- Signup remains disabled at the owner's request. No email service, D1 instance, payment system, public email, or reservation system is active.
+- Email signup remains disabled at the owner's request. Anonymous interest uses a dedicated D1 instance; no email service, payment system, public email, or reservation system is active.
 - Contact drafts download locally and are not sent.
 - The 3D viewer is an optional lazy chunk (~141 kB gzip). It requires WebGL and offers image galleries when unavailable.
 - No claims are made about manufactured devices, certifications, energy savings, customers, company registration, or release dates.

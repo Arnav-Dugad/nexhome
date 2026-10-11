@@ -107,7 +107,7 @@ export default function Simulator({ compact = false }: { compact?: boolean }) {
       <div className="simulator-head">
         <span className="eyebrow">
           <span className="status-dot" />
-          NEXHOME INTELLIGENCE
+          Profectus360 INTELLIGENCE
         </span>
         <span className="simulation-label">Interactive simulation</span>
       </div>

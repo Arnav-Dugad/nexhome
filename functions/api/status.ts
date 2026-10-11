@@ -1,4 +1,5 @@
 interface Env {
+  INTEREST_DB?: D1Database;
   DB?: D1Database;
   SIGNUPS_ENABLED?: string;
   PUBLIC_CONTACT_EMAIL?: string;
@@ -9,6 +10,7 @@ interface D1Database {
 export const onRequestGet = ({ env }: { env: Env }) =>
   Response.json(
     {
+      interest: !!env.INTEREST_DB,
       signups:
         env.SIGNUPS_ENABLED === "true" &&
         !!env.DB &&

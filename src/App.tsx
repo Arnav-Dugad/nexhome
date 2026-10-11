@@ -26,6 +26,7 @@ import {
   Reveal,
 } from "./components/Shared";
 import Simulator from "./components/Simulator";
+import InterestForm from "./components/InterestForm";
 const Viewer = lazy(() => import("./components/Viewer"));
 function Home() {
   const [focus, setFocus] = useState("core");
@@ -46,9 +47,15 @@ function Home() {
           <p>
             Technology that feels at home.
             <br />
-            Introducing the NEXHOME ecosystem.
+            Introducing the Profectus360 ecosystem.
           </p>
-          <LinkButton href="/products/core">Meet NEXHOME Core</LinkButton>
+          <div className="hero-actions">
+            <LinkButton href="/early-access">Express interest</LinkButton>
+            <TextLink href="/products/core">Meet Core</TextLink>
+          </div>
+          <span className="hero-interest-note">
+            Concepts in development · No email needed
+          </span>
         </div>
         <div className="hero-bottom">
           <span>
@@ -99,7 +106,7 @@ function Home() {
       <figure className="family-stage">
         <ProductImage id="lineup" />
         <figcaption>
-          THE NEXHOME FAMILY / ORIGINAL CONCEPT VISUALIZATION
+          THE Profectus360 FAMILY / ORIGINAL CONCEPT VISUALIZATION
         </figcaption>
       </figure>
       <section className="dark-section intelligence-teaser">
@@ -117,7 +124,7 @@ function Home() {
                 when needed. Quiet when it isn’t.
               </p>
               <TextLink href="/intelligence">
-                Explore NEXHOME Intelligence
+                Explore Profectus360 Intelligence
               </TextLink>
             </div>
           </div>
@@ -160,7 +167,7 @@ function Home() {
             <ProductImage id={focus} />
           </div>
           <div className="explorer-copy" aria-live="polite">
-            <span className="eyebrow">NEXHOME {p.name.toUpperCase()}</span>
+            <span className="eyebrow">Profectus360 {p.name.toUpperCase()}</span>
             <h3>{p.tagline}</h3>
             <p>{p.description}</p>
             <TextLink href={"/products/" + p.id}>Discover {p.name}</TextLink>
@@ -210,7 +217,7 @@ function Home() {
           <span className="architecture-line" />
           <div className="architecture-core">
             <Cpu />
-            <h3>NEXHOME Core</h3>
+            <h3>Profectus360 Core</h3>
             <p>Local processing target</p>
           </div>
           <span className="architecture-line" />
@@ -308,7 +315,7 @@ function Products() {
   return (
     <>
       <section className="section page-intro">
-        <Eyebrow>THE NEXHOME ECOSYSTEM</Eyebrow>
+        <Eyebrow>THE Profectus360 ECOSYSTEM</Eyebrow>
         <h1>
           Objects of purpose.
           <br />
@@ -371,7 +378,7 @@ function Gallery({ product }: { product: Product }) {
           Every intention.
         </h2>
         <p>
-            AI-generated concept imagery and original 3D design studies.
+          AI-generated concept imagery and original 3D design studies.
           Engineering details are illustrative.
         </p>
       </div>
@@ -463,7 +470,8 @@ function ProductPage({ product: p }: { product: Product }) {
       <section className={"product-hero product-" + p.id}>
         <div>
           <Eyebrow>
-            NEXHOME {p.name.toUpperCase()} / {p.category.toUpperCase()} CONCEPT
+            Profectus360 {p.name.toUpperCase()} / {p.category.toUpperCase()}{" "}
+            CONCEPT
           </Eyebrow>
           <h1>{p.tagline}</h1>
           <p>{p.description}</p>
@@ -475,8 +483,8 @@ function ProductPage({ product: p }: { product: Product }) {
               In development · not for sale
             </span>
           </div>
-          <LinkButton href="/early-access">
-            Follow {p.name}’s development
+          <LinkButton href={"/early-access?product=" + p.id}>
+            Express interest in {p.name}
           </LinkButton>
         </div>
         <ProductImage id={p.id} eager />
@@ -589,7 +597,7 @@ function ProductPage({ product: p }: { product: Product }) {
         <FAQ
           items={[
             [
-              `Can I buy NEXHOME ${p.name}?`,
+              `Can I buy Profectus360 ${p.name}?`,
               "No. This is an early-stage product concept. There is no checkout, preorder, reservation, or announced release date.",
             ],
             [
@@ -598,7 +606,7 @@ function ProductPage({ product: p }: { product: Product }) {
             ],
             [
               "Are the images real product photographs?",
-            "No. Beauty, material, and selected lifestyle images are AI-generated concept renders. Remaining views and the interactive viewer are simplified original 3D design studies. None represent manufactured prototypes.",
+              "No. Beauty, material, and selected lifestyle images are AI-generated concept renders. Remaining views and the interactive viewer are simplified original 3D design studies. None represent manufactured prototypes.",
             ],
             [
               "Will this work with my existing devices?",
@@ -616,7 +624,7 @@ function Intelligence() {
   return (
     <>
       <section className="section page-intro">
-        <Eyebrow>NEXHOME INTELLIGENCE</Eyebrow>
+        <Eyebrow>Profectus360 INTELLIGENCE</Eyebrow>
         <h1>
           A home that finds
           <br />
@@ -709,7 +717,7 @@ function Design() {
   return (
     <>
       <section className="section page-intro">
-        <Eyebrow>THE NEXHOME DESIGN LANGUAGE</Eyebrow>
+        <Eyebrow>THE Profectus360 DESIGN LANGUAGE</Eyebrow>
         <h1>
           Quiet by nature.
           <br />
@@ -815,7 +823,7 @@ function Story() {
           <em>thoughtful home.</em>
         </h1>
         <p>
-          NEXHOME is an early-stage Indian consumer technology concept. An
+          Profectus360 is an early-stage Indian consumer technology concept. An
           exploration of beautifully engineered objects and privacy-conscious
           intelligence.
         </p>
@@ -862,7 +870,7 @@ function Story() {
         <FAQ
           items={[
             [
-              "What is NEXHOME today?",
+              "What is Profectus360 today?",
               "An early-stage product concept and design exploration. Hardware and software are not commercially available.",
             ],
             [
@@ -940,170 +948,56 @@ function Journal({ slug }: { slug?: string }) {
   );
 }
 function Access() {
-  const [email, setEmail] = useState("");
-  const [consent, setConsent] = useState(false);
-  const [state, setState] = useState("idle");
-  const [message, setMessage] = useState("");
-  const [available, setAvailable] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    fetch("/api/status")
-      .then((r) => (r.ok ? r.json() : { signups: false }))
-      .then((data) => setAvailable(data.signups === true))
-      .catch(() => setAvailable(false))
-      .finally(() => setLoaded(true));
-  }, []);
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!available) return;
-    setState("loading");
-    try {
-      const r = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          consent,
-          website:
-            (e.target as HTMLFormElement).elements.namedItem(
-              "website",
-            ) instanceof HTMLInputElement
-              ? (
-                  (e.target as HTMLFormElement).elements.namedItem(
-                    "website",
-                  ) as HTMLInputElement
-                ).value
-              : "",
-        }),
-      });
-      const data = await r.json();
-      setState(r.ok ? "success" : "error");
-      setMessage(data.message ?? "Please try again later.");
-    } catch {
-      setState("error");
-      setMessage(
-        "Unable to connect. Your signup has not been saved. Please try again later.",
-      );
-    }
-  }
   return (
     <>
       <section className="section access-page">
         <div>
-          <Eyebrow>THE JOURNEY STARTS HERE</Eyebrow>
+          <Eyebrow>A SHARED VISION OF HOME</Eyebrow>
           <h1>
-            Curiosity looks
+            A little interest.
             <br />
-            <em>good on you.</em>
+            <em>A new possibility.</em>
           </h1>
           <p>
-            Follow the idea as it takes shape. There are no preorders, payments,
-            or promised launch dates. Just a more thoughtful vision of connected
-            living.
+            What does a more thoughtful connected home look like to you? Tell us
+            which Profectus360 concepts you’d love to see take shape.
           </p>
           <div className="access-promises">
             <p>
-              <Check size={17} />A transparent view of development
+              <Check size={17} />
+              Your product preferences, without personal details
             </p>
             <p>
               <Check size={17} />
-              No payment or reservation
+              No payment, preorder, or reservation
             </p>
             <p>
               <Check size={17} />
-              Only the information you choose to share
+              No email signup or marketing subscription
             </p>
           </div>
+          <div className="interest-editorial">
+            <ProductImage id="lineup" />
+            <p>FIVE CONCEPTS. ONE CONSIDERED HOME.</p>
+          </div>
         </div>
-        <div className="access-form">
-          <span className="eyebrow">EARLY INTEREST</span>
-          <h2>
-            Be part of
-            <br />
-            what comes next.
-          </h2>
-          {loaded && !available ? (
-            <div className="form-notice" role="status">
-              <span className="status-dot" />
-              <h3>Registration isn’t open yet.</h3>
-              <p>
-                Persistent signup infrastructure is not currently configured.
-                This site does not save your email or pretend to register your
-                interest.
-              </p>
-              <TextLink href="/journal">Explore the journal</TextLink>
-            </div>
-          ) : (
-            <form onSubmit={submit}>
-              <label htmlFor="email">Email address</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                maxLength={254}
-                autoComplete="email"
-                disabled={!loaded || state === "loading"}
-              />
-              <div className="honeypot" aria-hidden="true">
-                <label htmlFor="website">Website</label>
-                <input
-                  name="website"
-                  id="website"
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
-              </div>
-              <label className="consent">
-                <input
-                  type="checkbox"
-                  checked={consent}
-                  onChange={(e) => setConsent(e.target.checked)}
-                  required
-                />
-                I consent to storing my email to record interest in NEXHOME. I
-                have read the <a href="/privacy">privacy notice</a>.
-              </label>
-              <button
-                className="button"
-                disabled={!loaded || state === "loading" || state === "success"}
-              >
-                {state === "loading"
-                  ? "Saving…"
-                  : state === "success"
-                    ? "Interest recorded"
-                    : loaded
-                      ? "Register interest"
-                      : "Checking availability…"}
-                <ArrowUpRight size={16} />
-              </button>
-              <p className={"form-result " + state} role="status">
-                {message}
-              </p>
-              <p className="fine-print">
-                No email delivery service is connected. Registration records
-                interest only; no email updates are promised.
-              </p>
-            </form>
-          )}
-          <p className="fine-print">
-            Concept stage. No purchase or product reservation.
-          </p>
-        </div>
+        <InterestForm />
       </section>
       <section className="section faq-section">
         <h2>A little clarity.</h2>
         <FAQ
           items={[
             [
-              "Does signing up reserve a product?",
-              "No. Registering interest is not a preorder, reservation, purchase, or guarantee of availability.",
+              "What happens when I express interest?",
+              "Your selected product concepts are saved as anonymous feedback to help inform the project’s direction. No name or email address is requested.",
+            ],
+            [
+              "Does expressing interest reserve a product?",
+              "No. This is feedback on concepts in development, not a preorder, reservation, purchase, or guarantee of availability.",
             ],
             [
               "Will I receive emails?",
-              "No email service is integrated. If registration becomes available, it records interest only. Any future email subscription would require a separate, accurate disclosure.",
+              "No. Email signup remains unavailable and no email delivery service is connected. You can follow our progress in the journal.",
             ],
             [
               "What stage is the project in?",
@@ -1122,14 +1016,14 @@ function Contact() {
   function download() {
     const blob = new Blob(
       [
-        `NEXHOME inquiry draft\nTopic: ${topic}\n\n${text}\n\nThis draft has not been sent.\n`,
+        `Profectus360 inquiry draft\nTopic: ${topic}\n\n${text}\n\nThis draft has not been sent.\n`,
       ],
       { type: "text/plain;charset=utf-8" },
     );
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "nexhome-inquiry.txt";
+    a.download = "profectus360-inquiry.txt";
     a.click();
     URL.revokeObjectURL(url);
     setSaved(true);
@@ -1145,7 +1039,7 @@ function Contact() {
         </h1>
         <p>
           A verified contact channel has not been published yet. You can prepare
-          and download an inquiry locally; nothing is sent to NEXHOME.
+          and download an inquiry locally; nothing is sent to Profectus360.
         </p>
         <TextLink href="/story">Learn about the project</TextLink>
       </div>
@@ -1214,7 +1108,7 @@ function Legal({ type }: { type: string }) {
       sections: [
         [
           "Scope",
-          "This notice describes the NEXHOME concept website. It does not describe a released hardware product or app. Last updated: 10 October 2026.",
+          "This notice describes the Profectus360 concept website. It does not describe a released hardware product or app. Last updated: 11 October 2026.",
         ],
         [
           "Data on this website",
@@ -1222,11 +1116,11 @@ function Legal({ type }: { type: string }) {
         ],
         [
           "Early interest",
-          "The site checks whether signup storage is configured. When unavailable, no signup is submitted. If enabled, the form stores a normalized email address, explicit consent, and a creation time in Cloudflare D1. It collects no payment information. Duplicate submissions receive a generic response. No email delivery service is connected.",
+          "Express interest saves your selected product concepts, a random submission receipt, a consent version, and a submission time in Cloudflare D1. It requests no name, email address, contact details, or free-text message. The receipt prevents duplicate retries and is generated in memory for each submission; it is not a persistent browser identifier. Email signup remains unavailable. No subscription, reservation, or payment is created.",
         ],
         [
           "Local storage",
-          "Your selected light or dark theme is saved in your browser under nexhome-theme. No other persistent browser data is used by the site.",
+          "Your selected light or dark theme is saved in your browser under profectus360-theme. No other persistent browser data is used by the site.",
         ],
         [
           "Contact drafts",
@@ -1234,11 +1128,11 @@ function Legal({ type }: { type: string }) {
         ],
         [
           "Retention and requests",
-          "Any future signup deployment must establish and publish a data operator, a verified request channel, and a retention policy before accepting registrations. Signup is disabled until those are configured. The concept site currently has no published operator contact channel.",
+          "Anonymous preference records older than 180 days are deleted when new submissions arrive. To limit abuse, a one-way hash of your IP address and the UTC date is used separately for rate limiting; it is never attached to your product preferences. Rate-limit entries older than one hour are cleared on subsequent submissions. The application does not save raw IP addresses. The concept site has no published operator contact channel, so email signup remains disabled.",
         ],
         [
           "Your choices",
-          "You can clear the theme preference in your browser storage. Avoid entering sensitive information into inquiry drafts. Revisit this notice before using any future registration functionality.",
+          "You can clear the theme preference in your browser storage. Expressing interest is optional. Avoid entering sensitive information into inquiry drafts. Revisit this notice before using any future registration functionality.",
         ],
       ],
     },
@@ -1247,7 +1141,7 @@ function Legal({ type }: { type: string }) {
       sections: [
         [
           "The project",
-          "NEXHOME is an early-stage Indian consumer technology concept. This website presents design studies, editorial perspectives, and browser simulations. It does not assert registered-company status or commercial operations.",
+          "Profectus360 is an early-stage Indian consumer technology concept. This website presents design studies, editorial perspectives, and browser simulations. It does not assert registered-company status or commercial operations.",
         ],
         [
           "Concepts and estimates",
@@ -1276,11 +1170,11 @@ function Legal({ type }: { type: string }) {
         ],
         [
           "Theme preference",
-          "We use browser local storage, not a cookie, to remember your selected theme. Key: nexhome-theme. Values: light or dark. It remains until you clear it or change your preference.",
+          "We use browser local storage, not a cookie, to remember your selected theme. Key: profectus360-theme. Values: light or dark. It remains until you clear it or change your preference.",
         ],
         [
           "Forms and demos",
-          "Simulator state is kept in memory and resets when you reload. Contact drafts are downloaded locally. The signup availability check does not store a browser identifier.",
+          "Simulator state is kept in memory and resets when you reload. Contact drafts are downloaded locally. Interest submission receipts are kept in memory only and reset when you reload; they do not track your browser across visits.",
         ],
         [
           "Managing storage",
@@ -1314,7 +1208,7 @@ function NotFound() {
         <em>your way home.</em>
       </h1>
       <p>This page doesn’t exist. The ecosystem is a good place to start.</p>
-      <LinkButton href="/">Back to NEXHOME</LinkButton>
+      <LinkButton href="/">Back to Profectus360</LinkButton>
     </section>
   );
 }

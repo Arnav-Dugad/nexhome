@@ -54,7 +54,7 @@ export function Header({ path }: { path: string }) {
   useEffect(() => {
     const scroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", scroll, { passive: true });
-    const theme = localStorage.getItem("nexhome-theme") === "dark";
+    const theme = localStorage.getItem("profectus360-theme") === "dark";
     setDark(theme);
     document.documentElement.dataset.theme = theme ? "dark" : "light";
     return () => window.removeEventListener("scroll", scroll);
@@ -69,7 +69,7 @@ export function Header({ path }: { path: string }) {
   const toggle = () => {
     setDark(!dark);
     document.documentElement.dataset.theme = dark ? "light" : "dark";
-    localStorage.setItem("nexhome-theme", dark ? "light" : "dark");
+    localStorage.setItem("profectus360-theme", dark ? "light" : "dark");
   };
   const links = [
     ["Products", "/products"],
@@ -89,7 +89,7 @@ export function Header({ path }: { path: string }) {
           (scrolled ? "scrolled" : "")
         }
       >
-        <a href="/" className="wordmark" aria-label="NEXHOME home">
+        <a href="/" className="wordmark" aria-label="Profectus360 home">
           <svg
             className="brand-icon"
             width="20"
@@ -98,13 +98,15 @@ export function Header({ path }: { path: string }) {
             aria-hidden="true"
           >
             <path
-              d="M4 18V6l16 12V6"
+              d="M6 21V3h7a6 6 0 0 1 0 12H6"
               stroke="currentColor"
               strokeWidth="1.8"
               fill="none"
             />
           </svg>
-          NEXHOME
+          <span className="brand-name">
+            profectus<span>360</span>
+          </span>
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
           {links.map(([label, href]) => (
@@ -126,7 +128,7 @@ export function Header({ path }: { path: string }) {
             {dark ? <Sun size={17} /> : <Moon size={17} />}
           </button>
           <a className="nav-cta" href="/early-access">
-            Early access <ArrowUpRight size={14} />
+            Express interest <ArrowUpRight size={14} />
           </a>
           <button
             ref={menuRef}
@@ -173,7 +175,7 @@ export function Header({ path }: { path: string }) {
           {[
             ...links,
             ["Journal", "/journal"],
-            ["Early access", "/early-access"],
+            ["Express interest", "/early-access"],
           ].map(([label, href], i) => (
             <a key={href} href={href}>
               <span>0{i + 1}</span>
@@ -201,7 +203,9 @@ export function Footer() {
     <footer className="footer">
       <div className="footer-top">
         <a className="wordmark" href="/">
-          NEXHOME
+          <span className="brand-name">
+            profectus<span>360</span>
+          </span>
         </a>
         <p>
           Intelligence,
@@ -215,15 +219,17 @@ export function Footer() {
           <a href="/design">Design philosophy</a>
         </div>
         <div>
-          <span className="eyebrow">NEXHOME</span>
+          <span className="eyebrow">Profectus360</span>
           <a href="/story">Our story</a>
           <a href="/journal">Journal</a>
           <a href="/contact">Contact</a>
-          <a href="/early-access">Early access</a>
+          <a href="/early-access">Express interest</a>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© {2026} NEXHOME concept project. Designed with India in mind.</p>
+        <p>
+          © {2026} Profectus360 concept project. Designed with India in mind.
+        </p>
         <div>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
@@ -252,11 +258,13 @@ export function ProductImage({
   view = "beauty",
   eager = false,
   className = "",
+  sizes = "(max-width: 700px) 100vw, 60vw",
 }: {
   id: string;
   view?: string;
   eager?: boolean;
   className?: string;
+  sizes?: string;
 }) {
   const base =
     id === "core" && view === "macro"
@@ -270,12 +278,12 @@ export function ProductImage({
     <picture className={"product-picture " + className}>
       <source
         srcSet={`/images/${base}-640.webp 640w, /images/${base}-1280.webp 1280w`}
-        sizes="(max-width: 700px) 100vw, 60vw"
+        sizes={sizes}
         type="image/webp"
       />
       <img
         src={`/images/${base}-1280.webp`}
-        alt={`NEXHOME ${id[0].toUpperCase() + id.slice(1)} — ${view} concept render`}
+        alt={`Profectus360 ${id[0].toUpperCase() + id.slice(1)} — ${view} concept render`}
         width="1536"
         height="1024"
         loading={eager ? "eager" : "lazy"}
@@ -304,7 +312,7 @@ export function ProductCard({
       </div>
       <div className="card-info">
         <div>
-          <h3>NEXHOME {product.name}</h3>
+          <h3>Profectus360 {product.name}</h3>
           <p>{product.tagline}</p>
         </div>
         <span>
@@ -327,10 +335,10 @@ export function AccessCTA() {
         </h2>
         <div>
           <p>
-            We’re exploring what a more thoughtful connected home could be.
-            Discover where we’re heading.
+            We’re exploring what a more thoughtful connected home could be. Tell
+            us which concepts you’d love to see take shape.
           </p>
-          <LinkButton href="/early-access">Follow the journey</LinkButton>
+          <LinkButton href="/early-access">Express interest</LinkButton>
         </div>
       </div>
     </section>

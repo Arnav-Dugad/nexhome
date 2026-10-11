@@ -26,11 +26,11 @@ for (const path of routes) {
     .replace('<div id="root"></div>', `<div id="root">${render(path)}</div>`)
     .replace(
       /<title>.*?<\/title>/,
-      `<title>${escape(meta.title)} | NEXHOME</title>`,
+      `<title>${escape(meta.title)} | Profectus360</title>`,
     );
   html = html.replace(
     "</head>",
-    `<meta name="description" content="${escape(meta.description)}"/><link rel="canonical" href="${origin}${path === "/" ? "/" : path}"/><meta property="og:title" content="${escape(meta.title)} | NEXHOME"/><meta property="og:description" content="${escape(meta.description)}"/><meta property="og:type" content="website"/><meta property="og:url" content="${origin}${path}"/><meta property="og:image" content="${origin}/images/core-1280.webp"/><meta name="twitter:card" content="summary_large_image"/>${path === "/404" ? '<meta name="robots" content="noindex"/>' : ""}</head>`,
+    `<meta name="description" content="${escape(meta.description)}"/><link rel="canonical" href="${origin}${path === "/" ? "/" : path}"/><meta property="og:title" content="${escape(meta.title)} | Profectus360"/><meta property="og:description" content="${escape(meta.description)}"/><meta property="og:type" content="website"/><meta property="og:url" content="${origin}${path}"/><meta property="og:image" content="${origin}/images/core-1280.webp"/><meta name="twitter:card" content="summary_large_image"/>${path === "/404" ? '<meta name="robots" content="noindex"/>' : ""}</head>`,
   );
   const file =
     path === "/"

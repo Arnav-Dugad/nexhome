@@ -5,3 +5,9 @@ compatibility_date = "2026-10-10"
 [vars]
 SIGNUPS_ENABLED = "false"
 NODE_VERSION = "24"
+
+[[d1_databases]]
+binding = "INTEREST_DB"
+database_name = "profectus360-interest"
+database_id = "f72e5e77-b70f-4c67-a958-016f0fc5d9ea"
+migrations_dir = "migrations/interest"

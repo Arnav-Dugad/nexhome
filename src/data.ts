@@ -147,7 +147,7 @@ export const articles = [
       "On quiet objects, tactile interfaces, and the value of knowing when to disappear.",
     body: [
       "Most technology is designed to ask for attention. A home asks for something else: objects that belong comfortably among the things we already care about.",
-      "The NEXHOME concepts explore softly sculpted aluminum, restrained light, and a shared family of proportions. Material choices are visual and engineering proposals; manufacturing processes, recycled content, and durability remain to be evaluated.",
+      "The Profectus360 concepts explore softly sculpted aluminum, restrained light, and a shared family of proportions. Material choices are visual and engineering proposals; manufacturing processes, recycled content, and durability remain to be evaluated.",
       "A tactile dial can make a familiar task feel immediate. A small status light can communicate without another notification. The goal is not to remove every screen, but to choose an interface that fits the moment.",
     ],
   },
@@ -158,9 +158,9 @@ export const articles = [
     excerpt:
       "What Matter and Thread could mean for a more considered connected home.",
     body: [
-      "A useful smart home should not require every device to come from the same brand. Interoperability is therefore a central goal of the NEXHOME ecosystem.",
+      "A useful smart home should not require every device to come from the same brand. Interoperability is therefore a central goal of the Profectus360 ecosystem.",
       "Matter defines a common application language for compatible smart-home devices. Thread is a low-power mesh networking technology. They serve different roles and do not guarantee that every device or every feature will work together.",
-      "Our products target these technologies where suitable. Compatibility and certification require implementation and testing, so NEXHOME makes no certified interoperability claim at the concept stage. We will publish supported device categories only after validation.",
+      "Our products target these technologies where suitable. Compatibility and certification require implementation and testing, so Profectus360 makes no certified interoperability claim at the concept stage. We will publish supported device categories only after validation.",
     ],
   },
   {
@@ -172,7 +172,7 @@ export const articles = [
     body: [
       "India is not one kind of home. Apartments, multigenerational households, changing connectivity, and varied electrical installations create a rich set of needs.",
       "We are exploring simple controls, local-first routines, and an ecosystem that could adapt to different spaces. Installation requirements, serviceability, and affordability are questions to investigate through future research.",
-      "NEXHOME is an early-stage Indian product concept. There are no announced products, manufacturing operations, or customers. This journal documents a direction and the questions behind it.",
+      "Profectus360 is an early-stage Indian product concept. There are no announced products, manufacturing operations, or customers. This journal documents a direction and the questions behind it.",
     ],
   },
 ];
@@ -202,7 +202,7 @@ export function pageMeta(path: string) {
     "/design": "Considered in every detail",
     "/story": "An idea, taking shape",
     "/journal": "Notes from the studio",
-    "/early-access": "Be part of what comes next",
+    "/early-access": "Express interest",
     "/contact": "Start a conversation",
     "/privacy": "Privacy notice",
     "/terms": "Terms of use",
@@ -211,7 +211,7 @@ export function pageMeta(path: string) {
   };
   return {
     title: p
-      ? "NEXHOME " + p.name + " — " + p.tagline
+      ? "Profectus360 " + p.name + " — " + p.tagline
       : a
         ? a.title
         : (titles[path] ?? "Page not found"),
@@ -219,6 +219,6 @@ export function pageMeta(path: string) {
       ? p.description
       : a
         ? a.excerpt
-        : "Explore NEXHOME, an early-stage Indian smart-home concept. Beautifully considered hardware and privacy-conscious, local-first automation. Products are in development.",
+        : "Explore Profectus360, an early-stage Indian smart-home concept. Beautifully considered hardware and privacy-conscious, local-first automation. Products are in development.",
   };
 }

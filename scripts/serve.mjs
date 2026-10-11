@@ -30,7 +30,12 @@ http
     }
     if (pathname === "/api/status") {
       res.setHeader("Content-Type", "application/json");
-      res.end('{"signups":false}');
+      res.end('{"signups":false,"interest":false}');
+      return;
+    }
+    if (pathname === "/api/interest") {
+      res.writeHead(503, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ saved: false, message: "Use the Cloudflare local preview to test interest submissions." }));
       return;
     }
     const resolved = path.resolve(root, "." + pathname);
@@ -68,5 +73,5 @@ http
     }
   })
   .listen(port, "127.0.0.1", () =>
-    console.log(`NEXHOME production preview http://127.0.0.1:${port}`),
+    console.log(`Profectus360 production preview http://127.0.0.1:${port}`),
   );
