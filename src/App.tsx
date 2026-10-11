@@ -1013,6 +1013,11 @@ function Contact() {
   const [topic, setTopic] = useState("General interest");
   const [text, setText] = useState("");
   const [saved, setSaved] = useState(false);
+  const emailHref =
+    "mailto:support@profectus360.in?subject=" +
+    encodeURIComponent("Profectus360 inquiry: " + topic) +
+    "&body=" +
+    encodeURIComponent(text || "Hello Profectus360,\n\n");
   function download() {
     const blob = new Blob(
       [
@@ -1038,10 +1043,12 @@ function Contact() {
           <em>with a question.</em>
         </h1>
         <p>
-          A verified contact channel has not been published yet. You can prepare
-          and download an inquiry locally; nothing is sent to Profectus360.
+          Questions about the concepts, the project, or your privacy? Write to
+          us. We’d love to hear your perspective.
         </p>
-        <TextLink href="/story">Learn about the project</TextLink>
+        <TextLink href="mailto:support@profectus360.in">
+          support@profectus360.in
+        </TextLink>
       </div>
       <form
         onSubmit={(e) => {
@@ -1050,7 +1057,7 @@ function Contact() {
         }}
         className="contact-form"
       >
-        <h2>Prepare an inquiry</h2>
+        <h2>Let’s start a conversation.</h2>
         <label htmlFor="topic">What’s on your mind?</label>
         <select
           id="topic"
@@ -1083,12 +1090,17 @@ function Contact() {
           required
         />
         <p className="fine-print">
-          Browser-local draft. No contact details are collected, and this
-          message will not be submitted.
+          Compose an email in your mail app, review it, and send when you’re
+          ready. You can also keep a copy of your draft.
         </p>
-        <button className="button">
-          Download inquiry draft <ArrowDown size={16} />
-        </button>
+        <div className="contact-actions">
+          <a className="button" href={emailHref}>
+            Compose email <ArrowUpRight size={16} />
+          </a>
+          <button className="text-link" type="submit">
+            Download inquiry draft <ArrowDown size={16} />
+          </button>
+        </div>
         {saved && (
           <p role="status" className="form-result success">
             Draft downloaded. It has not been sent.
@@ -1124,11 +1136,11 @@ function Legal({ type }: { type: string }) {
         ],
         [
           "Contact drafts",
-          "Inquiry text is processed in the browser and downloaded only when you request it. It is not sent to a server or persisted by the site.",
+          "Inquiry text is prepared in your browser. Downloaded drafts stay on your device. Compose email opens your mail application with the draft; you review and send it yourself. Your email provider handles any email you choose to send. The website does not submit inquiry text to a server or persist it.",
         ],
         [
           "Retention and requests",
-          "Anonymous preference records older than 180 days are deleted when new submissions arrive. To limit abuse, a one-way hash of your IP address and the UTC date is used separately for rate limiting; it is never attached to your product preferences. Rate-limit entries older than one hour are cleared on subsequent submissions. The application does not save raw IP addresses. The concept site has no published operator contact channel, so email signup remains disabled.",
+          "Anonymous preference records older than 180 days are deleted when new submissions arrive. To limit abuse, a one-way hash of your IP address and the UTC date is used separately for rate limiting; it is never attached to your product preferences. Rate-limit entries older than one hour are cleared on subsequent submissions. The application does not save raw IP addresses. For support and privacy questions, contact support@profectus360.in. Email signup remains disabled.",
         ],
         [
           "Your choices",
@@ -1194,7 +1206,12 @@ function Legal({ type }: { type: string }) {
           <p>{body}</p>
         </section>
       ))}
-      <TextLink href="/contact">Contact information</TextLink>
+      <div className="legal-contact">
+        <TextLink href="mailto:support@profectus360.in">
+          support@profectus360.in
+        </TextLink>
+        <TextLink href="/contact">Contact information</TextLink>
+      </div>
     </section>
   );
 }

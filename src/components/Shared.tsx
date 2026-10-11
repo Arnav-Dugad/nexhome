@@ -223,6 +223,7 @@ export function Footer() {
           <a href="/story">Our story</a>
           <a href="/journal">Journal</a>
           <a href="/contact">Contact</a>
+          <a href="mailto:support@profectus360.in">Email support</a>
           <a href="/early-access">Express interest</a>
         </div>
       </div>

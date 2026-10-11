@@ -1798,6 +1798,21 @@ td {
 .interest-spinner {
   animation: interest-spin 1s linear infinite;
 }
+.contact-actions,
+.legal-contact {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.contact-actions .text-link {
+  min-height: 44px;
+  background: transparent;
+  cursor: pointer;
+}
+.legal-contact {
+  margin-top: 32px;
+}
 @keyframes interest-spin {
   to {
     transform: rotate(360deg);

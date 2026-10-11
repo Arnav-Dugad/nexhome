@@ -2,8 +2,9 @@
 
 **Intelligence, beautifully integrated.** A pre-launch smart-home concept website, designed with India in mind.
 
-Live: https://nexhome.pages.dev  
-Source: https://github.com/Arnav-Dugad/nexhome
+Live: https://profectus360.pages.dev
+
+Source: https://github.com/Arnav-Dugad/profectus360
 
 Profectus360 and its five devices are concepts in development. Images do not show manufactured prototypes. Specifications, features, and INR prices are provisional targets. There are no purchases, reservations, certifications, customer claims, or invented company credentials.
 
@@ -57,9 +58,9 @@ No private browser credentials, analytics, remote images, or paid runtime APIs. 
 
 ## Registration and contact
 
-**Email signup is unavailable at the owner's request. No public email is published.** Express interest is a working anonymous feedback form: visitors choose product concepts and consent to saving their choices. Cloudflare Pages Functions persist choices, a random retry receipt, consent version, and timestamp in the dedicated `profectus360-interest` D1 database. No names, emails, free-text messages, or persistent browser IDs are collected. Product-page buttons preselect that product.
+**Email signup remains unavailable. Public support and privacy contact: support@profectus360.in.** Express interest is a working anonymous feedback form: visitors choose product concepts and consent to saving their choices. Cloudflare Pages Functions persist choices, a random retry receipt, consent version, and timestamp in the dedicated `profectus360-interest` D1 database. No names, emails, free-text messages, or persistent browser IDs are collected. Product-page buttons preselect that product.
 
-The handler validates same-origin JSON requests and allowed products, limits payloads, rejects honeypots, and applies atomic rate limiting using short-lived daily IP hashes kept separately from choices. Retries use one receipt to avoid duplicate records. Preference records older than 180 days and rate-limit entries older than one hour are deleted on subsequent submissions. This is anonymous feedback, with no subscription, payment, or reservation. Contact downloads a browser-local inquiry draft and explicitly says it is not sent.
+The handler validates same-origin JSON requests and allowed products, limits payloads, rejects honeypots, and applies atomic rate limiting using short-lived daily IP hashes kept separately from choices. Retries use one receipt to avoid duplicate records. Preference records older than 180 days and rate-limit entries older than one hour are deleted on subsequent submissions. This is anonymous feedback, with no subscription, payment, or reservation. Contact offers a mail-app draft addressed to support@profectus360.in and a browser-local download. Visitors review and send emails in their own mail app; the website does not transmit inquiry text.
 
 For the complete local form-to-database flow:
 
@@ -77,7 +78,7 @@ The separate, inactive email-signup handler has same-origin checks, payload limi
 
 ## Deployment
 
-The public brand is Profectus360. The existing GitHub repository and Cloudflare Pages URLs are retained to preserve links and deployment history. Cloudflare Pages project: `nexhome`. Production branch: `main`. Build command: `npm run build`. Output: `dist`. Node: 24. Native GitHub integration builds changes pushed to `main`.
+The GitHub repository and production Cloudflare Pages project are named `profectus360`. The project uses the matching `profectus360.pages.dev` address and the existing interest database. The original host redirects to the new address through the `profectus360-legacy` project; its redirect source is in `deploy/legacy-redirect`, and automatic Git builds are disabled there. Cloudflare Pages project: `profectus360`. Production branch: `main`. Build command: `npm run build`. Output: `dist`. Node: 24. Native GitHub integration builds changes pushed to `main`.
 
 ```sh
 git push origin main

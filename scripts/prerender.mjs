@@ -17,7 +17,7 @@ await fs.writeFile(
     `script-src 'self' 'sha256-${themeHash}';`,
   ),
 );
-const origin = process.env.SITE_URL || "https://nexhome.pages.dev";
+const origin = process.env.SITE_URL || "https://profectus360.pages.dev";
 const escape = (s) =>
   s.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
 for (const path of routes) {

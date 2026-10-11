@@ -1,5 +1,13 @@
 # Verification
 
+## Hosting and contact update — 11 October 2026
+
+- GitHub repository renamed to `Arnav-Dugad/profectus360`; repository ID and commit history are preserved, and the local Git remote uses the new URL.
+- Production Cloudflare Pages project uses `profectus360.pages.dev`, connected to the renamed repository with native Git integration. The existing `profectus360-interest` D1 database is reused.
+- The original project is retained as `profectus360-legacy` because an in-place Cloudflare project rename preserves its original subdomain. It redirects old links to the new address. Automatic Git builds are disabled on the legacy project.
+- Published support and privacy address: `support@profectus360.in`. Contact offers an email draft through the visitor’s own mail app and a local draft download. No message is sent automatically.
+- Canonical links, sitemap, robots file, deployment configuration, and current documentation use the new production address. Email signup remains disabled; anonymous product-interest submissions continue using the existing database.
+
 ## Profectus360 update — 11 October 2026
 
 - Rebranded public content, metadata, navigation, favicon, download filenames, and theme storage. Existing repository and hosting URLs are preserved.

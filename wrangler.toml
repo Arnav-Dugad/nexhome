@@ -1,10 +1,11 @@
-name = "nexhome"
+name = "profectus360"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-10-10"
 
 [vars]
 SIGNUPS_ENABLED = "false"
 NODE_VERSION = "24"
+PUBLIC_CONTACT_EMAIL = "support@profectus360.in"
 
 [[d1_databases]]
 binding = "INTEREST_DB"

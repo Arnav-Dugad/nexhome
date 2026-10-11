@@ -6,10 +6,10 @@ import { onRequestPost as interestPost } from "../functions/api/interest.ts";
 import { DatabaseSync } from "node:sqlite";
 import { readFileSync } from "node:fs";
 const request = (data) =>
-  new Request("https://nexhome.pages.dev/api/signup", {
+  new Request("https://profectus360.pages.dev/api/signup", {
     method: "POST",
     headers: {
-      Origin: "https://nexhome.pages.dev",
+      Origin: "https://profectus360.pages.dev",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -89,10 +89,10 @@ test("honeypot submissions do not access storage", async () => {
 });
 
 const interestRequest = (data) =>
-  new Request("https://nexhome.pages.dev/api/interest", {
+  new Request("https://profectus360.pages.dev/api/interest", {
     method: "POST",
     headers: {
-      Origin: "https://nexhome.pages.dev",
+      Origin: "https://profectus360.pages.dev",
       "Content-Type": "application/json",
       "CF-Connecting-IP": "192.0.2.17",
     },
@@ -193,10 +193,10 @@ test("anonymous interest rejects invalid origins, content types, payloads, conse
     ).status,
     413,
   );
-  const malformed = new Request("https://nexhome.pages.dev/api/interest", {
+  const malformed = new Request("https://profectus360.pages.dev/api/interest", {
     method: "POST",
     headers: {
-      Origin: "https://nexhome.pages.dev",
+      Origin: "https://profectus360.pages.dev",
       "Content-Type": "application/json",
     },
     body: "{",
